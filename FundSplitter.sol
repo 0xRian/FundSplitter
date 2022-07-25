@@ -1,6 +1,6 @@
 pragma solidity ^0.8.15;
 
-contract FundSplitter.sol {
+contract FundSplitter {
     address payable [] public receiver;
     event TransferReceived(address _from, uint _amount);
 
@@ -11,7 +11,7 @@ contract FundSplitter.sol {
     }
     receive() payable external {
         uint256 share = msg.value / receiver.length;
-        for uint i=0; i < receiver.length; i++) {
+        for (uint i=0; i < receiver.length; i++) {
             receiver[i].transfer(share);
         }
         emit TransferReceived(msg.sender, msg.value);
